@@ -23,19 +23,19 @@ class Forecast {
     }       
 }
 
-app.get('/weatherData', (req, res) => {
+app.get('/weatherData', (request, response) => {
     const searchQuery = request.query.searchQuery;
     console.log('searchQuery', searchQuery);
-    let searchResult = weatherData.find(object => object.city_name.toLowerCase() === searchQuery.tolowerCase());
+    let searchResult = weatherData.find(object => object.city_name===searchQuery);
     console.log(searchResult);
+    const result = searchResult.data.map(dayObj => new Forecast(dayObj));
+    //const result = new Forecast(searchResult);
+    response.status(200).send(result);
+    console.log(result[0].data);
 })
-const result = searchResult.data.map(dayObj => new Forecast(dayObj));
-//const result = new Forecast(searchResult);
-response.status(200).send(result);
-console.log(result);
+    
 
-
-app.get('*', (req, res) => {
+app.get('*', (request, response) => {
     response.send('Does Not Compute');
 });
 
