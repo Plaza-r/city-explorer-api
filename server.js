@@ -16,6 +16,23 @@ const PORT = process.env.PORT || 3002; //define port
 
 console.log(weatherData);
 
+
+
+app.get('/weatherData', (request, response) => {
+    const searchQuery = request.query.searchQuery;
+    //console.log('searchQuery', searchQuery);
+    console.log(searchQuery);
+
+    let searchResult = weatherData.find(object => object.city_name === searchQuery);
+    console.log(searchResult);
+    
+    const result = searchResult.data.map(dayObj => new Forecast(dayObj));
+    //const result = new Forecast(searchResult); original
+    response.status(200).send(result); // send it back to original request
+    //console.log(result[0].data); first mod
+    console.log(result);
+})
+
 class Forecast {
     constructor(weatherObject){ 
     this.datetime = weatherObject.datetime;
@@ -23,17 +40,9 @@ class Forecast {
     }       
 }
 
-app.get('/weatherData', (request, response) => {
-    const searchQuery = request.query.searchQuery;
-    console.log('searchQuery', searchQuery);
-    let searchResult = weatherData.find(object => object.city_name===searchQuery);
-    console.log(searchResult);
-    const result = searchResult.data.map(dayObj => new Forecast(dayObj));
-    //const result = new Forecast(searchResult);
-    response.status(200).send(result);
-    console.log(result[0].data);
-})
+
     
+
 
 app.get('*', (request, response) => {
     response.send('Does Not Compute');
