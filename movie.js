@@ -13,8 +13,6 @@ async function getMovies(cityName) {
             return new Movie(dailyMovie);
         
         });
-        
-         console.log(selectedMovie);
         return selectedMovie;
     
     } catch (error) {

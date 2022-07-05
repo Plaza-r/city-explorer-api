@@ -5,21 +5,18 @@ const axios = require('axios');
 async function getWeather ({lat, lon, cityName}) {
     try {
         
-       
-
-
         let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&days=3&lat=${lat}&lon=${lon}&units=I`;
 
         console.log(url, 'url ==')
 
         
         
-        let weatherObject = await axios.get(url);
+        let cityWeather = await axios.get(url);
 
-        console.log(weatherObject, 'CITY WEATHER TWO')
+        console.log(cityWeather, 'CITY WEATHER TWO')
 
 
-        let selectedCity = weatherObject.data.data.map(dailyWeather => {
+        let selectedCity = cityWeather.data.data.map(dailyWeather => {
             return new Forecast(dailyWeather);
         });
     console.log(selectedCity);
@@ -31,22 +28,70 @@ async function getWeather ({lat, lon, cityName}) {
 }
 
 class Forecast {
-    constructor(weatherObject) {
-        this.date = weatherObject.datetime;
-        this.description = weatherObject.weather.description;
-        this.temp = weatherObject.temp;
-        this.min_temp = weatherObject.min_temp;
-        this.max_temp = weatherObject.max_temp;
-        console.log(weatherObject);
+    constructor(cityWeather) {
+        this.date = cityWeather.datetime;
+        this.description = cityWeather.weather.description;
+        this.temp = cityWeather.temp;
+        this.min_temp = cityWeather.min_temp;
+        this.max_temp = cityWeather.max_temp;
+        console.log(cityWeather);
     }
 }
+module.exports = getWeather
 
 
+
+
+
+// 'use strict'
+
+// const axios = require('axios');
+
+// async function getWeather (lat, lon, cityName) {
+//     try {
+        
+       
+
+
+//         let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&days=3&lat=${lat}&lon=${lon}&units=I`;
+
+//         console.log(url, 'url ==')
+
+        
+        
+//         let weatherObject = await axios.get(url);
+
+//         console.log(weatherObject, 'CITY WEATHER TWO')
+
+
+//         let selectedCity = weatherObject.data.data.map(dailyWeather => {
+//             return new Forecast(dailyWeather);
+//         });
+//     console.log(selectedCity);
+//         return selectedCity;
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+
+// }
 
 // class Forecast {
-//     constructor(weatherObject){ 
-//     this.datetime = weatherObject.datetime;
-//     this.description = weatherObject.weather.description;
-//     }       
+//     constructor(weatherObject) {
+//         this.date = weatherObject.datetime;
+//         this.description = weatherObject.weather.description;
+//         this.temp = weatherObject.temp;
+//         this.min_temp = weatherObject.min_temp;
+//         this.max_temp = weatherObject.max_temp;
+//         console.log(weatherObject);
+//     }
+// }
+
+
+
+// // class Forecast {
+// //     constructor(weatherObject){ 
+// //     this.datetime = weatherObject.datetime;
+// //     this.description = weatherObject.weather.description;
+// //     }       
     
-module.exports = getWeather;
+// module.exports = getWeather;
