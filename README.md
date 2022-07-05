@@ -53,6 +53,16 @@ Lab 7 Partner: Jamal Malik
 
 ## Actual time needed to complete: 6 hours
 
+## Name of feature: added movie and modified weather
+
+## Estimate of time needed to complete: 6 
+
+## Start time: 1500
+
+## Finish time: 2100
+
+## Actual time needed to complete:
+
 ## Name of feature: Refactor lab 9
 
 ## Estimate of time needed to complete: 6 
@@ -61,4 +71,4 @@ Lab 7 Partner: Jamal Malik
 
 ## Finish time: 2100
 
-## Actual time needed to complete: Refactor
+## Actual time needed to complete:
